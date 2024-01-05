@@ -22,9 +22,9 @@ parameters:
     type: string
     default: 'Image Generation Variables'
 
-  - name: create_release
-    type: boolean
-    default: true
+  # - name: create_release
+  #   type: boolean
+  #   default: true
 
   - name: repository_ref
     type: string
@@ -152,19 +152,19 @@ jobs:
                         -PrefixToPathTrim "$(TemplateDirectoryPath)" `
                         -PrintTopNLongest 25
 
-  - ${{ if eq(parameters.create_release, true) }}:
-    - task: PowerShell@2
-      displayName: 'Create release for VM deployment'
-      inputs:
-        targetType: filePath
-        filePath: ./images.CI/linux-and-win/create-release.ps1
-        arguments: -BuildId $(Build.BuildId) `
-                   -Organization $(RELEASE_TARGET_ORGANIZATION) `
-                   -DefinitionId $(RELEASE_TARGET_DEFINITION_ID) `
-                   -Project $(RELEASE_TARGET_PROJECT) `
-                   -ImageType "${{ parameters.image_type }}" `
-                   -ManagedImageName "$(ManagedImageName)" `
-                   -AccessToken $(RELEASE_TARGET_TOKEN)
+  # - ${{ if eq(parameters.create_release, true) }}:
+  #   - task: PowerShell@2
+  #     displayName: 'Create release for VM deployment'
+  #     inputs:
+  #       targetType: filePath
+  #       filePath: ./images.CI/linux-and-win/create-release.ps1
+  #       arguments: -BuildId $(Build.BuildId) `
+  #                  -Organization $(RELEASE_TARGET_ORGANIZATION) `
+  #                  -DefinitionId $(RELEASE_TARGET_DEFINITION_ID) `
+  #                  -Project $(RELEASE_TARGET_PROJECT) `
+  #                  -ImageType "${{ parameters.image_type }}" `
+  #                  -ManagedImageName "$(ManagedImageName)" `
+  #                  -AccessToken $(RELEASE_TARGET_TOKEN)
 
   - task: PowerShell@2
     displayName: 'Clean up resources'
