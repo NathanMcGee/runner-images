@@ -40,7 +40,7 @@ jobs:
   displayName: Image Generation (${{ parameters.image_type }})
   timeoutInMinutes: 600
   cancelTimeoutInMinutes: 30
-  pool: $(agent_pool)
+  pool: ${{ parameters.agent_pool }}
   variables:
   - group: ${{ parameters.variable_group_name }}
 
