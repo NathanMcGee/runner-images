@@ -25,6 +25,11 @@ parameters:
   # - name: create_release
   #   type: boolean
   #   default: true
+  
+  - name: agent_pool
+    type: object
+    default:
+      name: 'ado-build-agent'
 
   - name: repository_ref
     type: string
@@ -35,8 +40,7 @@ jobs:
   displayName: Image Generation (${{ parameters.image_type }})
   timeoutInMinutes: 600
   cancelTimeoutInMinutes: 30
-  pool: 
-    vmImage: 'ubuntu-latest'
+  pool: $(agent_pool)
   variables:
   - group: ${{ parameters.variable_group_name }}
 
