@@ -207,15 +207,3 @@ jobs:
   #                  -ImageType "${{ parameters.image_type }}" `
   #                  -ManagedImageName "$(ManagedImageName)" `
   #                  -AccessToken $(RELEASE_TARGET_TOKEN)
-
-  - task: PowerShell@2
-    displayName: 'Clean up resources'
-    condition: always()
-    inputs:
-      targetType: filePath
-      filePath: ./images.CI/linux-and-win/cleanup.ps1
-      arguments: -TempResourceGroupName "$(TempResourceGroupName)" `
-                 -SubscriptionId $(AZURE_SUBSCRIPTION) `
-                 -ClientId $(CLIENT_ID) `
-                 -ClientSecret $(CLIENT_SECRET) `
-                 -TenantId $(AZURE_TENANT)
